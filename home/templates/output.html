@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sketch Image Display</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+
+    h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #333;
+      text-align: center;
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .image-container img {
+      max-width: 450px;
+      max-height: 500px; 
+      height: auto;
+      border: 3px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .download-btn {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+      text-decoration: none;
+    }
+
+    .download-btn:hover {
+      background-color: #218838;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h2>Sketch Image</h2>
+  
+  <div class="image-container">
+    <img src="http://127.0.0.1:8000/media/{{ sketch_image }}" alt="Pencil Sketch" id="sketchImage">
+  </div>
+  
+  <a id="downloadLink" href="http://127.0.0.1:8000/media/{{ sketch_image }}" download="sketch_image.jpg" class="download-btn">
+    Download 
+  </a>
+
+</body>
+</html>

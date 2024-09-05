@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image To Pencil Sketch</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+    
+    .container {
+      width: 400px;
+      padding: 30px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .upload-container {
+      padding: 20px;
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    #file-input {
+      display: none;
+    }
+
+    #select-btn {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #select-btn:hover {
+      background-color: #0056b3;
+    }
+
+    #upload-btn {
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: none;
+      margin: 20px auto;
+    }
+
+    #upload-btn:hover {
+      background-color: #218838;
+    }
+
+    #image-preview {
+      display: none;
+      margin: 20px auto;
+      max-width: 350px;
+      max-height: 400px;
+      object-fit: cover; 
+      border: 2px solid #ddd;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Image To Pencil Sketch</h2>
+    <p>File Upload & Image Preview</p>
+    
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      
+      <div class="upload-container">
+        <button id="select-btn" type="button" onclick="document.getElementById('file-input').click()">Select a file</button>
+        <input id="file-input" type="file" name="image" accept="image/*">
+        <img id="image-preview" src="#" alt="Image Preview">
+      </div>
+      
+      <button id="upload-btn" type="submit">Upload Image</button>
+    </form>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById('file-input');
+    const imagePreview = document.getElementById('image-preview');
+    const uploadBtn = document.getElementById('upload-btn');
+    const selectBtn = document.getElementById('select-btn');
+
+    fileInput.addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          imagePreview.src = e.target.result;
+          imagePreview.style.display = 'block'; 
+          uploadBtn.style.display = 'block';  
+          selectBtn.style.marginBottom = '15px'; 
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+
+</body>
+</html>
